@@ -1,0 +1,24 @@
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #000;
+  label {
+    font-size: 14px;
+    color: var(--grey-500);
+    font-weight: bold;
+  }
+}
+.p-inputtext {
+  border: 1px solid red var(--grey-500);
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  color: #000;
+  height: 45px;
+  &:enabled:hover, &:enabled:focus {
+    border-color:  var(--yellow-100) !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}

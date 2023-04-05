@@ -1,6 +1,10 @@
-//quicksand font
+//fonts
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap");
+//components
+@import "./assets/styles/components/forms.scss";
 
+// variables
+@import "./assets/styles/variables";
 * {
   margin: 0;
   padding: 0;
