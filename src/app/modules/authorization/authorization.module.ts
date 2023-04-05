@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AuthorizationRoutingModule } from './authorization-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import {ChipsModule} from "primeng/chips";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SignupComponent } from './components/signup/signup.component';
   ],
   imports: [
     CommonModule,
-    AuthorizationRoutingModule
+    AuthorizationRoutingModule,
+    ChipsModule
   ]
 })
 export class AuthorizationModule { }
