@@ -1,0 +1,18 @@
+.btn {
+  &-default {
+      background: var(--orange) !important;
+      color: var(--white-800) !important;
+      border: 1px solid var(--orange) !important;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+      &:hover {
+        background-color: transparent !important;
+        color: var(--orange) !important;
+      }
+  }
+}
