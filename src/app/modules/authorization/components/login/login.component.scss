@@ -20,7 +20,13 @@
       gap: 40px;
 
       .input-field {
-        width: 100%;
+        width: 100% !important;
+        input {
+          width: 100%;
+        }
+        &.ng-dirty.ng-invalid {
+          width: 100% !important;
+        }
       }
 
       p-button {

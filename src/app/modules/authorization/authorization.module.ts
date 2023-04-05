@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import {ChipsModule} from "primeng/chips";
 import {ButtonModule} from "primeng/button";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {ButtonModule} from "primeng/button";
     CommonModule,
     AuthorizationRoutingModule,
     ChipsModule,
-    ButtonModule
+    ButtonModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthorizationModule { }
