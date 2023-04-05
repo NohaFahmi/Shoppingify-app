@@ -10,18 +10,32 @@
     width: 100%;
     max-width: 700px;
     margin: auto;
-    padding: 100px;
+    padding: 70px 100px;
+
     form {
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      align-items: center;
+      width: 100%;
+      gap: 40px;
+
+      .input-field {
+        width: 100%;
+      }
+
+      p-button {
+        width: 100%;
+        max-width: 200px !important;
+      }
     }
   }
+
   &__logo-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
+
     h3 {
       max-width: 300px;
     }
