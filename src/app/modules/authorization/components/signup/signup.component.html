@@ -1,1 +1,42 @@
-<p>signup works!</p>
+<div class="signup-page__container">
+  <div class="signup-page__logo-wrapper">
+    <img src="assets/images/logo.svg"/>
+    <h3>Shoppingify allows you take your shopping list wherever you go</h3>
+  </div>
+  <form class="input-group" [formGroup]="signupForm">
+    <div class="input-field" [ngClass]="{'ng-invalid': getFormValidationErrors(signupForm.controls['email'])}">
+      <label for="email">Email</label>
+      <input pInputText id="email" formControlName="email"/>
+      <p class="p-error" *ngIf="getFormValidationErrors(signupForm.controls['email'])">
+        {{getFormValidationErrors(signupForm.controls['email']) == 1 ? 'Email is required' : 'Email is invalid'}}
+      </p>
+    </div>
+    <div class="input-field" [ngClass]="{'ng-invalid': getFormValidationErrors(signupForm.controls['password'])}">
+      <label for="password">Password</label>
+      <input pInputText id="password" type="password"
+             formControlName="password"/>
+      <p class="p-error" *ngIf="getFormValidationErrors(signupForm.controls['password'])">
+        {{getFormValidationErrors(signupForm.controls['password']) == 1 ? 'Password is required' : 'Password is invalid'}}
+      </p>
+    </div>
+    <div class="input-field"
+         [ngClass]="{'ng-invalid': getFormValidationErrors(signupForm.controls['passwordConfirm']) || (signupForm.controls['passwordConfirm'].value !== signupForm.controls['password'].value) }">
+      <label for="password">Password</label>
+      <input pInputText id="passwordConfirm" type="password"
+             formControlName="passwordConfirm"/>
+      <p class="p-error"
+         *ngIf="getFormValidationErrors(signupForm.controls['password']) || (signupForm.controls['passwordConfirm'].value !== signupForm.controls['password'].value)">
+        {{getFormValidationErrors(signupForm.controls['password']) == 1 ?
+        'Password is required' :
+        (signupForm.controls['passwordConfirm'].value !== signupForm.controls['password'].value) ?
+          'Passwords do not match'
+          :
+          'Password is invalid'}}
+      </p>
+    </div>
+    <p-button label="Signup" styleClass="btn-default" (onClick)="onSignup()" [disabled]="signupForm.invalid"></p-button>
+  </form>
+  <div class="signup-page__footer">
+    <p>Already have an account? <a routerLink="/auth/login">Login</a></p>
+  </div>
+</div>
