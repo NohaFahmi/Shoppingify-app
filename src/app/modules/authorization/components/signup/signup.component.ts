@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../../../shared/services/auth/auth.service";
+import {first} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +13,9 @@ export class SignupComponent {
   signupForm:FormGroup;
   private emailPattern = '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$';
   private passwordPattern = '^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-!@#$%^&*_~+/.])\\S{8,20}$';
-  constructor(private formBuilder:FormBuilder) {
+  constructor(private formBuilder:FormBuilder,
+              private authService: AuthService,
+              private router: Router) {
     this.signupForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       password: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.passwordPattern)])),
@@ -35,6 +40,18 @@ export class SignupComponent {
     return 0;
   }
   onSignup() {
-    //TODO: implement signup logic
+    this.authService.emailSignup({
+      email: this.signupForm.value.email,
+      password: this.signupForm.value.password
+    }).pipe(first()).subscribe((result) => {
+      this.authService.userInfo.next({
+        displayName: result.user.displayName,
+        email: result.user.email,
+        photoURL: result.user.photoURL,
+        emailVerified: result.user.emailVerified,
+        uid: result.user.uid,
+      })
+      this.router.navigate(['/items'])
+    });
   }
 }

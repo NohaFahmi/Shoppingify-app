@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../../../shared/services/auth/auth.service";
+import {first} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,9 @@ export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   private emailPattern = '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$';
   private passwordPattern = '^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-!@#$%^&*_~+/.])\\S{8,20}$';
-  constructor(private formBuilder:FormBuilder) {
+  constructor(private formBuilder:FormBuilder,
+              private authService:AuthService,
+              private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       password: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.passwordPattern)])),
@@ -35,7 +40,13 @@ export class LoginComponent implements OnInit {
     return 0;
   }
   onLogin() {
-    //TODO: implement login logic
+    this.authService.loginWithEmail({
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    }).pipe(first()).subscribe((res) => {
+      console.log(res);
+      this.router.navigate(['/items'])
+    })
   }
 
 }
