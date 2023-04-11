@@ -21,7 +21,7 @@ export class AuthService {
   logoutUser(): Observable<any> {
     return from(this.authFirebase.signOut());
   }
-  getUserRefreshToken(): Observable<string> {
+  getUserRefreshToken(): Observable<any> {
     return new Observable((observer) => {
       this.authFirebase.onAuthStateChanged(user => {
         observer.next(user?.refreshToken);
@@ -36,4 +36,5 @@ export class AuthService {
       });
     })
   }
+
 }
