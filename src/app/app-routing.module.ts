@@ -1,28 +1,28 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {canActivate} from "./core/guards/auth.guard";
+import {
+  canActivate,
+  redirectLoggedInTo,
+  redirectUnauthorizedTo,
+} from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectLoggedInToItems = () => redirectLoggedInTo(['items']);
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'auth/login'},
-  {path: 'auth', pathMatch: 'full', redirectTo: 'auth/login'},
+  {path: '', pathMatch: 'full', redirectTo: 'app/items'},
   {
     path: 'auth',
-    loadChildren: () => import('./modules/authorization/authorization.module').then(m => m.AuthorizationModule)
+    loadChildren: () => import('./modules/authorization/authorization.module').then(m => m.AuthorizationModule),
+    canActivate:[AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToItems }
   },
   {
-    path: 'items',
-    loadChildren: () => import('./modules/menu-items/menu-items.module').then(m => m.MenuItemsModule),
-    canActivate: [canActivate]
-  },
-  {
-    path: 'orders-history',
-    loadChildren: () => import('./modules/menu-items/menu-items.module').then(m => m.MenuItemsModule),
-    canActivate: [canActivate]
-  },
-  {
-    path: 'stats',
-    loadChildren: () => import('./modules/menu-items/menu-items.module').then(m => m.MenuItemsModule),
-    canActivate: [canActivate]
+    path: 'app',
+    loadChildren: () => import('./core/layout/layout.module').then(m => m.LayoutModule),
+    canActivate:[AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
 ];
 

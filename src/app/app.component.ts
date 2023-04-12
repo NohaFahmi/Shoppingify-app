@@ -15,11 +15,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getUserRefreshToken().subscribe((data) => {
-      console.log("REFRESH TOKEN", data);
-    })
-    let userInfoSub = this.authService.userInfo.subscribe((data) => {
-      this.userInfo = data;
-    })
   }
 }

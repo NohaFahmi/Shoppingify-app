@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { MenuItemsRoutingModule } from './menu-items-routing.module';
 import { MenuItemsComponent } from './menu-items.component';
-import {CoreModule} from "../../core/core.module";
 
 
 @NgModule({
@@ -13,7 +12,6 @@ import {CoreModule} from "../../core/core.module";
     imports: [
         CommonModule,
         MenuItemsRoutingModule,
-        CoreModule
     ]
 })
 export class MenuItemsModule { }

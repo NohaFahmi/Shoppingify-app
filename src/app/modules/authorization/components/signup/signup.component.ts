@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 import {AuthService} from "../../../../shared/services/auth/auth.service";
 import {first} from "rxjs";
 import {Router} from "@angular/router";
+import {IUserInfo} from "../../../../shared/interfaces/auth.interface";
 
 @Component({
   selector: 'app-signup',
@@ -44,14 +45,10 @@ export class SignupComponent {
       email: this.signupForm.value.email,
       password: this.signupForm.value.password
     }).pipe(first()).subscribe((result) => {
-      this.authService.userInfo.next({
-        displayName: result.user.displayName,
-        email: result.user.email,
-        photoURL: result.user.photoURL,
-        emailVerified: result.user.emailVerified,
-        uid: result.user.uid,
+      this.authService.userInfo.next(result.user as IUserInfo);
+      this.authService.sendVerificationEmail().then(() => {
+        this.router.navigate(['/items'])
       })
-      this.router.navigate(['/items'])
     });
   }
 }
