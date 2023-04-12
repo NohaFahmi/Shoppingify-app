@@ -12,6 +12,7 @@ const redirectLoggedInToItems = () => redirectLoggedInTo(['items']);
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'app/items'},
+  {path: 'app', pathMatch: 'full', redirectTo: 'app/items'},
   {
     path: 'auth',
     loadChildren: () => import('./modules/authorization/authorization.module').then(m => m.AuthorizationModule),
