@@ -47,7 +47,7 @@ export class SignupComponent {
     }).pipe(first()).subscribe((result) => {
       this.authService.userInfo.next(result.user as IUserInfo);
       this.authService.sendVerificationEmail().then(() => {
-        this.router.navigate(['/items'])
+        this.router.navigate(['/'])
       })
     });
   }
