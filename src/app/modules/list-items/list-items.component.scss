@@ -32,6 +32,9 @@
   }
   &__items-groups {
     margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
     .unit-chip {
       display: flex;
       flex-direction: row;
@@ -39,7 +42,7 @@
       justify-content: space-between;
       gap: 10px;
       border-radius: 12px;
-      width: 180px;
+      width: 170px;
       min-height: 50px;
       padding: 16px;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
@@ -73,7 +76,8 @@
       &_units {
         display: flex;
         flex-direction: row;
-        gap: 20px 45px;
+        gap: 45px 20px;
+        flex-wrap: wrap;
       }
     }
   }
