@@ -16,9 +16,20 @@
   font-size: 14px;
   color: #000;
   height: 45px;
+  width: 100%;
+  &::placeholder {
+    color: var(--lighter-grey);
+  }
   &:enabled:hover, &:enabled:focus {
     border-color:  var(--yellow-100) !important;
     outline: none !important;
     box-shadow: none !important;
   }
+}
+.p-input-icon-left>i, .p-input-icon-right>i {
+  top: 35% !important;
+  @media (max-width: 786px) {
+    top: 50% !important;
+  }
+  color: var(--dark-grey)
 }
