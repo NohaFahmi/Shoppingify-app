@@ -1,8 +1,11 @@
 <div class="layout-wrapper">
   <div class="app-sidebar">
-    <app-sidebar></app-sidebar>
+    <app-sidebar (onOpenShoppingList)="onListOpened()"></app-sidebar>
   </div>
   <div class="app-content">
     <router-outlet></router-outlet>
+  </div>
+  <div class="shopping-list-sidebar" [ngClass]="{'active-list' : isListOpen}">
+    <app-shopping-list-sidebar></app-shopping-list-sidebar>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {MenuItem} from "primeng/api";
 
 @Component({
@@ -8,7 +8,8 @@ import {MenuItem} from "primeng/api";
   encapsulation: ViewEncapsulation.None
 })
 export class SidebarComponent implements OnInit{
-  @Input() menuItems: MenuItem[] = []
+  @Input() menuItems: MenuItem[] = [];
+  @Output() onOpenShoppingList:EventEmitter<any> = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.menuItems = [
@@ -18,4 +19,7 @@ export class SidebarComponent implements OnInit{
     ];
   }
 
+  openShoppingList() {
+    this.onOpenShoppingList.emit();
+  }
 }
