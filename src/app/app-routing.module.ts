@@ -22,8 +22,8 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () => import('./core/layout/layout.module').then(m => m.LayoutModule),
-    canActivate:[AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin }
+    // canActivate:[AngularFireAuthGuard],
+    // data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
 ];
 

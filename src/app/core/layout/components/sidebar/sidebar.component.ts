@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {MenuItem} from "primeng/api";
+import {AuthService} from "../../../../shared/services/auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +9,29 @@ import {MenuItem} from "primeng/api";
   styleUrls: ['./sidebar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SidebarComponent implements OnInit{
+export class SidebarComponent implements OnInit {
   @Input() menuItems: MenuItem[] = [];
-  @Output() onOpenShoppingList:EventEmitter<any> = new EventEmitter<any>();
+  @Output() onOpenShoppingList: EventEmitter<any> = new EventEmitter<any>();
+  menuOptions: {name:string; icon: string; command:() => any}[] = [
+    {
+      name: "Logout",
+      icon: "pi pi-fw pi-sign-out",
+      command: () => {
+        this.authService.logoutUser().then(() => {
+          this.authService.userInfo.next(null);
+          this.router.navigate(['/auth/login'])
+        })
+      }
+    },
+    {
+      name: "Shopping List",
+      icon: "pi pi-fw pi-shopping-cart",
+      command: () => {}
+    }
+  ];
+
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.menuItems = [
@@ -21,5 +43,11 @@ export class SidebarComponent implements OnInit{
 
   openShoppingList() {
     this.onOpenShoppingList.emit();
+  }
+
+  onSelectOption($event: any) {
+    $event.originalEvent.stopPropagation();
+    $event.originalEvent.preventDefault();
+    $event.value.command();
   }
 }
