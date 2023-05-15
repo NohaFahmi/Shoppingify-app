@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShoppingListSidebarComponent } from './shopping-list-sidebar.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('ShoppingListSidebarComponent', () => {
   let component: ShoppingListSidebarComponent;
@@ -8,7 +9,10 @@ describe('ShoppingListSidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShoppingListSidebarComponent ]
+      declarations: [ ShoppingListSidebarComponent ],
+      imports: [
+        HttpClientTestingModule
+      ]
     })
     .compileComponents();
 

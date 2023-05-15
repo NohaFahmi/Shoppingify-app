@@ -1,7 +1,7 @@
 <div class="list-items-page__container container">
   <div class="list-items-page__header">
-    <h4><span>Shoppingify</span> allows you take your shopping list wherever you go</h4>
-    <div class="p-input-icon-left input-field">
+    <h4 id="title"><span>Shoppingify</span> allows you take your shopping list wherever you go</h4>
+    <div class="p-input-icon-left input-field" id="search-field">
       <i class="pi pi-search"></i>
       <input type="text" pInputText placeholder="search item"/>
     </div>
@@ -11,7 +11,7 @@
       <h5 class="items-group_title">{{group.key}}</h5>
       <div class="items-group_units">
         <p-chip styleClass="unit-chip" *ngFor="let item of group.value;">
-          <p>{{item.itemName}}</p>
+<!--          <p>{{item.itemName}}</p>-->
           <i class="pi pi-plus"></i>
         </p-chip>
       </div>
