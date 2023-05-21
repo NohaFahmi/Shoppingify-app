@@ -17,6 +17,16 @@ export class AuthService {
   emailSignup(signupInfo: IAuthInfo):Observable<any> {
     return from(this.authFirebase.createUserWithEmailAndPassword(signupInfo.email, signupInfo.password));
   }
+
+  createUserInDB(userInfo: IUserInfo): Observable<any> {
+    return this.httpService.post('users/create', userInfo);
+  }
+  getUserByUUID(uid: string): Observable<any> {
+    return this.httpService.post(`users/getById`, {uid: uid});
+  }
+  updateUserInDB(userInfo: IUserInfo): Observable<any> {
+    return this.httpService.put(`users/update`, userInfo);
+  }
   loginWithEmail(loginInfo: IAuthInfo): Observable<any> {
     return from(this.authFirebase.signInWithEmailAndPassword(loginInfo.email, loginInfo.password))
   }
