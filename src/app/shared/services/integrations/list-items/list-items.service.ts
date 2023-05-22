@@ -11,6 +11,18 @@ export class ListItemsService {
   constructor(private httpService: HttpService) { }
 
   getAllListItems(): Observable<{items: {_id: string, items: IListItem[]}[]}> {
-    return this.httpService.get('list-items.interface.ts');
+    return this.httpService.get('list-items/getAll');
+  }
+  getItemById(id: string): Observable<{item: IListItem}> {
+    return this.httpService.get(`list-items/get/${id}`);
+  }
+  updateListItem(id: string, item: IListItem): Observable<{item: IListItem}> {
+    return this.httpService.put(`list-items/update`, item);
+  }
+  deleteListItem(id: string): Observable<{item: IListItem}> {
+    return this.httpService.delete(`list-items/delete/${id}`);
+  }
+  createListItem(item: IListItem): Observable<{item: IListItem}> {
+    return this.httpService.post(`list-items/create`, item);
   }
 }
