@@ -19,7 +19,13 @@ export class AuthService {
   }
 
   createUserInDB(userInfo: IUserInfo): Observable<any> {
-    return this.httpService.post('users/create', userInfo);
+    return this.httpService.post('users/create', {
+      uid: userInfo.uid,
+      email: userInfo.email,
+      username: userInfo.displayName,
+      photoURL: userInfo.photoURL,
+      emailVerified: userInfo.emailVerified
+    });
   }
   getUserByUUID(uid: string): Observable<any> {
     return this.httpService.post(`users/getById`, {uid: uid});
