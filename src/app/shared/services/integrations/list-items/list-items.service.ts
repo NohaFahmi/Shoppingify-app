@@ -10,7 +10,7 @@ export class ListItemsService {
 
   constructor(private httpService: HttpService) { }
 
-  getAllListItems(): Observable<{items: {_id: string, items: IListItem[]}[]}> {
+  getAllListItems(): Observable<{items: {_id: string,categoryName:string; items: IListItem[]}[]}> {
     return this.httpService.get('list-items/getAll');
   }
   getItemById(id: string): Observable<{item: IListItem}> {
