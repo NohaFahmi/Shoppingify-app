@@ -9,6 +9,6 @@ export const environment = {
     messagingSenderId: "208494348969",
     appId: "1:208494348969:web:f0f6ef94496154585477b8",
     measurementId: "G-242MNHH57P"
-  }
-
+  },
+  apiURL: 'https://shoppingify-app-apis.vercel.app/api/v1/'
 }

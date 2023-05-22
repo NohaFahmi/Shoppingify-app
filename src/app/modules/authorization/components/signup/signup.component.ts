@@ -44,11 +44,23 @@ export class SignupComponent {
     this.authService.emailSignup({
       email: this.signupForm.value.email,
       password: this.signupForm.value.password
-    }).pipe(first()).subscribe((result) => {
-      this.authService.userInfo.next(result.user as IUserInfo);
-      this.authService.sendVerificationEmail().then(() => {
-        this.router.navigate(['/'])
-      })
+    }).pipe(first()).subscribe({
+      next: (result) => {
+        this.authService.createUserInDB(result.user as IUserInfo).pipe(first()).subscribe({
+          next: (user) => {
+            this.authService.userInfo.next(user as IUserInfo);
+            this.router.navigate(['/'])
+          },
+          error: (error) => {
+            window.alert(error.message)
+          },
+          complete: () => {}
+        });
+      },
+      error: (error) => {
+        window.alert(error.message)
+      },
+      complete: () => {}
     });
   }
 }

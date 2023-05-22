@@ -48,16 +48,27 @@ export class LoginComponent implements OnInit {
     this.authService.loginWithEmail({
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
-    }).pipe(first()).subscribe(
-      (result) => {
-        this.authService.userInfo.next(result.user as IUserInfo);
-        this.router.navigate(['/'])
-      },
-      (error) => {
-        window.alert(error.message)
-      },
-      () => {
-        this.router.navigate(['/'])
+    }).pipe(first()).subscribe({
+        next: (result) => {
+          this.authService.getUserByUUID(result.user?.uid as string).pipe(first()).subscribe(
+            {
+              next: (user) => {
+                this.authService.userInfo.next(result.user as IUserInfo);
+                this.router.navigate(['/'])
+              },
+              error: (error) => {
+                window.alert(error.message)
+              },
+              complete: () => {
+              }
+              }
+          )
+        },
+        error: (error) => {
+          window.alert(error.message)
+        },
+        complete: () => {
+        }
       }
     )
   }
