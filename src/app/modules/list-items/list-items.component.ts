@@ -9,7 +9,7 @@ import {IListItem} from "../../shared/interfaces/list-items.interface";
 })
 export class ListItemsComponent implements OnInit {
 
-  listOfItems: {[key: string]: IListItem[]} = {}
+   listOfItems: {[key: string]: IListItem[]} = {}
   constructor() {
   }
   ngOnInit() {}

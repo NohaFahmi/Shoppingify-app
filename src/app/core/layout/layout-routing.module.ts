@@ -8,8 +8,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {path: 'items', loadChildren: () => import('../../modules/list-items/list-items.module').then(mod => mod.ListItemsModule)},
-      // {path: 'orders-history', loadChildren: () => import('../../modules/menu-items/menu-items.module').then(mod => mod.MenuItemsModule)},
-      // {path: 'stats', loadChildren: () => import('../../modules/menu-items/menu-items.module').then(mod => mod.MenuItemsModule)},
+      {path: 'orders-history', loadChildren: () => import('../../modules/history/history.module').then(mod => mod.HistoryModule)},
+      {path: 'stats', loadChildren: () => import('../../modules/stats/stats.module').then(mod => mod.StatsModule)},
     ]
   }
 ];
