@@ -1,1 +1,26 @@
-<p>new-item-form works!</p>
+<div class="new-item-form__container">
+  <h3>Add a new item</h3>
+  <form>
+    <div class="input-group">
+      <label>Name</label>
+      <input pInputText placeholder="Enter a name"/>
+    </div>
+    <div class="input-group">
+      <label>Note (optional)</label>
+      <textarea id="float-input" rows="5" cols="30" pInputTextarea placeholder="Enter a note"></textarea>
+    </div>
+    <div class="input-group">
+      <label>Image (optional)</label>
+      <input pInputText placeholder="Enter a url"/>
+    </div>
+    <div class="input-group categories-dropdown">
+      <label>Category</label>
+      <p-dropdown [options]="[{name: 'item', id:1}, {name:'item2', id:2}]" optionLabel="name"></p-dropdown>
+    </div>
+
+    <div class="form-actions">
+      <p-button label="Cancel" styleClass="p-button-link"></p-button>
+      <p-button label="Save" class="btn-default"></p-button>
+    </div>
+  </form>
+</div>

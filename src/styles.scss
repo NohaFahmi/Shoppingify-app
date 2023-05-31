@@ -1,9 +1,11 @@
 //fonts
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 //components
 @import "./assets/styles/components/forms.scss";
 @import "./assets/styles/components/buttons.scss";
 
+//icons
+@import "primeicons/primeicons.css";
 // variables
 @import "./assets/styles/variables";
 * {
@@ -11,16 +13,18 @@
   padding: 0;
   box-sizing: border-box;
 }
-html {
-  font-family: 'Quicksand', sans-serif;
-}
+
 html, body {
   height: 100%;
   width: 100%;
+  font-family: 'Quicksand', sans-serif !important;
 }
 
 body {
   margin: 0;
   position: relative;
+  p {
+    margin-bottom: 0;
+  }
 }
 

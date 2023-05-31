@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ShoppingListSidebarComponent } from './shopping-list-sidebar.component';
 import {UserShoppingListModule} from "../user-shopping-list/user-shopping-list.module";
 import {NewItemFormModule} from "../new-item-form/new-item-form.module";
-import {NewItemViewModule} from "../new-item-view/new-item-view.module";
+import {ItemDetailsModule} from "../item-details/item-details.module";
 
 
 
@@ -18,7 +18,7 @@ import {NewItemViewModule} from "../new-item-view/new-item-view.module";
     CommonModule,
     UserShoppingListModule,
     NewItemFormModule,
-    NewItemViewModule
+    ItemDetailsModule
   ]
 })
 export class ShoppingListSidebarModule { }

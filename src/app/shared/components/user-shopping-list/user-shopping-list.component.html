@@ -1,1 +1,51 @@
-<p>user-shopping-list works!</p>
+<div class="user-shopping-list__container">
+  <div class="user-shopping-list__new-item-banner">
+    <img src="assets/images/bottle.svg" alt="bottle"/>
+    <div class="actions-wrapper">
+      <p>Didn’t find what you need?</p>
+      <button type="button" pButton label="Add item"></button>
+    </div>
+  </div>
+  <div class="user-shopping-list__content">
+    <div class="user-shopping-list__content_title">
+      <h2>My Shopping List</h2>
+      <p-button icon="pi pi-pencil" class="edit-btn" (click)="toggleEditMode(true)"></p-button>
+    </div>
+    <div class="user-shopping-list__content_items-list">
+      <div class="list-item" *ngFor="let group of listOfShoppingItems | keyvalue;">
+        <h4>{{group.key}}</h4>
+        <div *ngFor="let item of group.value" class="item-checkbox">
+          <p-checkbox [name]="group.key" [value]="item.name" *ngIf="!isEditMode"></p-checkbox>
+          <label [for]="item.name" class="item">
+            <p class="item-name">Pre-cooked corn 450g</p>
+            <p class="item-quantity" *ngIf="!isEditMode">
+              <span>10 pcs</span>
+            </p>
+            <span class="item-quantity-edit" *ngIf="isEditMode">
+              <button type="button"
+                      pButton icon="pi pi-trash"
+                      class="delete-btn"></button>
+              <p-inputNumber
+                [showButtons]="true"
+                [step]="0.25"
+                buttonLayout="horizontal"
+                inputId="horizontal"
+                spinnerMode="horizontal"
+                decrementButtonClass="p-button-danger"
+                incrementButtonClass="p-button-success"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus">
+            </p-inputNumber>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="user-shopping-list__footer">
+    <div class="p-inputgroup">
+      <input type="text" pInputText placeholder="list name"/>
+      <button type="button" pButton label="Save"></button>
+    </div>
+  </div>
+</div>
