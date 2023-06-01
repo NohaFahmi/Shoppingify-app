@@ -15,11 +15,13 @@
     padding: 18px 25px;
     border-radius: 25px;
     margin: 45px 45px 40px;
+
     img {
       position: absolute;
       top: -20px;
       left: 0;
     }
+
     .actions-wrapper {
       display: flex;
       flex-direction: column;
@@ -30,10 +32,12 @@
       line-height: 20px;
       right: 0;
       gap: 13px;
+
       p {
         max-width: 160px;
-        margin:0;
+        margin: 0;
       }
+
       button {
         padding: 11px 29px !important;
         height: 40px;
@@ -51,17 +55,20 @@
   &__content {
     padding: 0 35px;
     max-height: 360px;
+
     &_title {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 40px;
+
       h2 {
         font-size: 24px;
         line-height: 30px;
         font-weight: 700;
         color: #34333A;
       }
+
       p-button {
         button {
           background: transparent !important;
@@ -71,6 +78,7 @@
           color: #34333A !important;
           padding: 0 !important;
           height: fit-content !important;
+
           &:hover {
             background-color: transparent !important;
             border: none !important;
@@ -82,6 +90,7 @@
 
       }
     }
+
     &_items-list {
       display: flex;
       flex-direction: column;
@@ -89,34 +98,42 @@
       max-height: 275px;
       overflow-y: scroll;
       padding: 0 3px;
+
       &::-webkit-scrollbar {
         display: none;
       }
+
       .list-item {
         display: flex;
         flex-direction: column;
         gap: 25px;
+
         h4 {
           font-weight: 500;
           font-size: 14px;
           line-height: 18px;
           color: #828282;
         }
+
         .item {
           display: flex;
           justify-content: space-between;
           gap: 8px;
+
           &-checkbox {
             display: flex;
             flex-direction: row;
             gap: 16px;
+
             p-checkbox {
               display: block !important;
             }
+
             .p-checkbox-focused {
               box-shadow: none !important;
               outline: none !important;
             }
+
             .p-checkbox {
               .p-checkbox-box {
                 border: 2px solid #F9A109 !important;
@@ -125,17 +142,20 @@
                 height: 24px !important;
                 background: transparent !important;
               }
+
               .p-checkbox-icon {
                 color: #F9A109 !important;
               }
             }
           }
+
           &-name {
             font-weight: 500;
             font-size: 18px;
             color: #000000;
             margin-bottom: 0;
           }
+
           &-quantity {
             display: flex;
             justify-content: center;
@@ -144,6 +164,7 @@
             border-radius: 24px;
             height: 32px;
             width: 68px;
+
             span {
               color: #F9A109;
               font-weight: 700;
@@ -151,6 +172,7 @@
               line-height: 15px;
             }
           }
+
           &-quantity-edit {
             display: flex;
             background-color: #fff;
@@ -158,10 +180,12 @@
             border-radius: 12px;
             max-width: 175px;
             gap: 5px;
+
             .p-button.p-button-icon-only {
               height: fit-content !important;
               padding: 10px;
               width: fit-content !important;
+
               &.delete-btn {
                 background: #F9A109 !important;
                 border: none !important;
@@ -169,6 +193,7 @@
                 outline: none !important;
                 color: #fff !important;
                 border-radius: 12px;
+
                 &:hover {
                   background-color: transparent !important;
                   border: none !important;
@@ -180,16 +205,19 @@
 
             }
           }
+
           p-inputnumber {
             width: 173px;
             height: 45px;
             border: none;
             background: #FFFFFF;
             border-radius: 0 12px 12px 0;
+
             .p-inputnumber {
               align-items: center;
               gap: 15px;
             }
+
             .p-inputnumber-input {
               background-color: #fff;
               color: #F9A109;
@@ -201,6 +229,7 @@
               height: 32px;
               width: 68px;
             }
+
             .p-inputnumber-button {
               border: none;
               background: transparent;
@@ -214,6 +243,7 @@
       }
     }
   }
+
   &__footer {
     height: 130px;
     background-color: #fff;
@@ -223,6 +253,7 @@
     align-items: center;
     padding: 40px;
     margin-top: auto;
+
     .p-inputgroup {
       input {
         font-weight: 500;
@@ -233,10 +264,35 @@
         border-radius: 12px 0 0 12px;
 
       }
+
       .p-button {
         background-color: #F9A109;
         border: none;
         border-radius: 0 12px 12px 0;
+      }
+    }
+
+    .footer-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+
+      .btn-default {
+        button {
+          background: #56CCF2 !important;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 20px;
+          color: #FFFFFF;
+
+          &:hover {
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            color: #FFFFFF !important;
+          }
+        }
       }
     }
   }

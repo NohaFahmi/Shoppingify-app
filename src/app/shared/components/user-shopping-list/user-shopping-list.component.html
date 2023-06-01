@@ -43,9 +43,13 @@
     </div>
   </div>
   <div class="user-shopping-list__footer">
-    <div class="p-inputgroup">
+    <div class="p-inputgroup" *ngIf="isEditMode">
       <input type="text" pInputText placeholder="list name"/>
       <button type="button" pButton label="Save"></button>
+    </div>
+    <div class="footer-actions" *ngIf="!isEditMode">
+      <p-button label="Cancel" styleClass="p-button-link"></p-button>
+      <p-button label="Complete" class="btn-default complete-btn"></p-button>
     </div>
   </div>
 </div>
