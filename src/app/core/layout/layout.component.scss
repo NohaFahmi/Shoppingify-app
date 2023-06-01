@@ -5,7 +5,12 @@
   gap: 10px;
   background-color: #FaFaFe;
   .app-content {
-    width: 100%
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   .shopping-list-sidebar {
     width: 0;

@@ -1,0 +1,96 @@
+.shopping-history {
+  &__container {
+    padding: 35px 60px;
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 32px;
+    color: #34333A;
+    margin-bottom: 40px;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 55px;
+    &_grouped-orders {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .orders-date {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        color: #000000;
+      }
+      .grouped-orders {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        .order-item {
+          background: #FFFFFF;
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+          border-radius: 12px;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          height: 65px;
+          padding: 0 20px;
+          &_name {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 20px;
+            color: #000;
+          }
+          &_info {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            align-items: center;
+
+            i {
+              color: #C1C1C4;
+            }
+            p {
+              font-weight: 500;
+              font-size: 12px;
+              line-height: 15px;
+              color: #C1C1C4;
+            }
+            .status-label {
+              border-radius: 8px;
+              font-weight: 500;
+              font-size: 12px;
+              line-height: 15px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 10px;
+              height: 25px;
+              margin: 0 15px 0 10px;
+              &.completed {
+                border: 1px solid #56CCF2;
+                color: #56CCF2;
+              }
+              &.canceled {
+                color: #EB5757;
+                border: 1px solid #EB5757;
+              }
+            }
+            .details-btn {
+              button {
+                width: fit-content;
+                padding: 0;
+                &:hover {
+                  background: transparent !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
