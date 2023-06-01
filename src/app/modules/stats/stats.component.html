@@ -1,1 +1,28 @@
-<p>stats works!</p>
+<div class="stats-page__container">
+  <div class="stats-page__top-stats">
+    <div class="stats-page__top-stats_top-items">
+      <h4>Top Items</h4>
+      <div class="top-item-wrapper">
+        <div class="top-item-info">
+          <p>item name</p>
+          <p>50%</p>
+        </div>
+        <p-progressBar [value]="50" [showValue]="false" [color]="'#F9A109'"></p-progressBar>
+      </div>
+    </div>
+    <div class="stats-page__top-stats_top-categories">
+      <h4>Top Categories</h4>
+      <div class="top-item-wrapper">
+        <div class="top-item-info">
+          <p>item name</p>
+          <p>50%</p>
+        </div>
+        <p-progressBar [value]="50" [showValue]="false" [color]="'#56CCF2'"></p-progressBar>
+      </div>
+    </div>
+  </div>
+  <div class="stats-page__top-stats_monthly-summary">
+    <h4>Monthly Summary</h4>
+    <p-chart type="line" [data]="data" [options]="options"></p-chart>
+  </div>
+</div>
