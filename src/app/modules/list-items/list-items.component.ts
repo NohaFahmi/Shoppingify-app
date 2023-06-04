@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {IListItem} from "../../shared/interfaces/list-items.interface";
 import {ListItemsService} from "../../shared/services/integrations/list-items/list-items.service";
-import {CategoriesService} from "../../shared/services/integrations/categories/categories.service";
+import {ShoppingListsService} from "../../shared/services/integrations/shopping-lists/shopping-lists.service";
 
 @Component({
   selector: 'app-list-items.interface.ts',
@@ -11,8 +11,9 @@ import {CategoriesService} from "../../shared/services/integrations/categories/c
 })
 export class ListItemsComponent implements OnInit {
 
-   listOfItems?: {[key: string]: IListItem[]};
-  constructor(private listItemsService: ListItemsService) {
+  listOfItems?: {[key: string]: IListItem[]};
+  constructor(private listItemsService: ListItemsService,
+              private shoppingListService: ShoppingListsService) {
   }
   ngOnInit() {
     this.getAllListItems();
@@ -34,5 +35,12 @@ export class ListItemsComponent implements OnInit {
           console.log('complete');
         }
       });
+  }
+
+  viewItemDetails(item: IListItem) {
+    console.log("ITEM", item)
+  }
+
+  onAddingItemToList(item: IListItem) {
   }
 }

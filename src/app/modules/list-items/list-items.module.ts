@@ -6,18 +6,20 @@ import { ListItemsComponent } from './list-items.component';
 import {ChipModule} from "primeng/chip";
 import {ChipsModule} from "primeng/chips";
 import {InputTextModule} from "primeng/inputtext";
+import {ButtonModule} from "primeng/button";
 
 
 @NgModule({
   declarations: [
     ListItemsComponent
   ],
-  imports: [
-    CommonModule,
-    ListItemsRoutingModule,
-    ChipModule,
-    ChipsModule,
-    InputTextModule
-  ]
+    imports: [
+        CommonModule,
+        ListItemsRoutingModule,
+        ChipModule,
+        ChipsModule,
+        InputTextModule,
+        ButtonModule
+    ]
 })
 export class ListItemsModule { }
