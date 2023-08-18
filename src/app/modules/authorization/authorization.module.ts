@@ -7,6 +7,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import {ChipsModule} from "primeng/chips";
 import {ButtonModule} from "primeng/button";
 import {ReactiveFormsModule} from "@angular/forms";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     AuthorizationRoutingModule,
     ChipsModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule
   ]
 })
 export class AuthorizationModule { }

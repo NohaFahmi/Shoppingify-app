@@ -3,7 +3,6 @@ import {HttpService} from "../http/http.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {IAuthInfo, IUserInfo} from "../../interfaces/auth.interface";
 import {BehaviorSubject, from, Observable} from "rxjs";
-import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -27,23 +26,28 @@ export class AuthService {
       emailVerified: userInfo.emailVerified
     });
   }
+
   getUserByUUID(uid: string): Observable<any> {
     return this.httpService.post(`users/getById`, {uid: uid});
   }
+
   updateUserInDB(userInfo: IUserInfo): Observable<any> {
     return this.httpService.put(`users/update`, userInfo);
   }
+
   loginWithEmail(loginInfo: IAuthInfo): Observable<any> {
     return from(this.authFirebase.signInWithEmailAndPassword(loginInfo.email, loginInfo.password))
   }
-  logoutUser(): Promise<any> {
-    return this.authFirebase.signOut();
+
+  logoutUser(): Observable<any> {
+    return from(this.authFirebase.signOut());
   }
 
   sendVerificationEmail() {
     return this.authFirebase.currentUser.then((user) =>
       user?.sendEmailVerification());
   }
+
   getUserRefreshToken(): Observable<any> {
     return new Observable((observer) => {
       this.authFirebase.onAuthStateChanged(user => {

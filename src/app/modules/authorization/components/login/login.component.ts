@@ -1,23 +1,31 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../shared/services/auth/auth.service";
-import {first} from "rxjs";
+import {Observable, of, Subject, takeUntil} from "rxjs";
 import {Router} from "@angular/router";
-import {IUserInfo} from "../../../../shared/interfaces/auth.interface";
+import {Store} from "@ngrx/store";
+import {AuthorizationActions, AuthorizationSelectors, AuthState} from "../../../../store/authorization";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
+  isUserLoggedIn$: Observable<boolean> = of(false);
+  loginErrors$: Observable<string | null> = of(null);
+  isLoading$: Observable<boolean> = of(false);
+  isLoading: boolean = false;
+  private destroy$: Subject<void> = new Subject();
   private emailPattern = '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$';
   private passwordPattern = '^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-!@#$%^&*_~+/.])\\S{8,20}$';
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private store: Store<AuthState>, private messageService: MessageService) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       password: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.passwordPattern)])),
@@ -25,6 +33,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginErrors$ = this.store.select(AuthorizationSelectors.selectErrors);
+    this.isLoading$ = this.store.select(AuthorizationSelectors.selectIsLoading);
+    this.isUserLoggedIn$ = this.store.select(AuthorizationSelectors.selectIsLoggedIn);
   }
 
   getFormValidationErrors(fieldControl: AbstractControl | null): number {
@@ -45,32 +56,27 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.authService.loginWithEmail({
+    this.isLoading$.pipe(takeUntil(this.destroy$)).subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
+    this.store.dispatch(AuthorizationActions.login({
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
-    }).pipe(first()).subscribe({
-        next: (result) => {
-          this.authService.getUserByUUID(result.user?.uid as string).pipe(first()).subscribe(
-            {
-              next: (user) => {
-                this.authService.userInfo.next(result.user as IUserInfo);
-                this.router.navigate(['/'])
-              },
-              error: (error) => {
-                window.alert(error.message)
-              },
-              complete: () => {
-              }
-              }
-          )
-        },
-        error: (error) => {
-          window.alert(error.message)
-        },
-        complete: () => {
-        }
+    }));
+    this.isUserLoggedIn$.pipe(takeUntil(this.destroy$)).subscribe((isUserLoggedIn) => {
+      if (isUserLoggedIn) {
+        this.router.navigate(['/app/items']);
       }
-    )
+    });
+    this.loginErrors$.pipe(takeUntil(this.destroy$)).subscribe((loginErrors) => {
+      if (loginErrors) {
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Invalid email or password'});
+      }
+    });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

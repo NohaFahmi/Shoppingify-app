@@ -1,6 +1,9 @@
 <div class="login-page__container">
+  <div class="errors-wrapper">
+    <p-toast></p-toast>
+  </div>
   <div class="login-page__logo-wrapper">
-    <img src="assets/images/logo.svg"/>
+    <img alt="logo" src="assets/images/logo.svg"/>
     <h3>Shoppingify allows you take your shopping list wherever you go</h3>
   </div>
   <form class="input-group" [formGroup]="loginForm">
@@ -14,12 +17,13 @@
     <div class="input-field" [ngClass]="{'ng-invalid': getFormValidationErrors(loginForm.controls['password'])}">
       <label for="password">Password</label>
       <input pInputText id="password" type="password"
-             formControlName="password" />
+             formControlName="password"/>
       <p class="p-error" *ngIf="getFormValidationErrors(loginForm.controls['password'])">
         {{getFormValidationErrors(loginForm.controls['password']) == 1 ? 'Password is required' : 'Password is invalid'}}
       </p>
     </div>
-    <p-button label="Login" styleClass="btn-default" (onClick)="onLogin()" [disabled]="loginForm.invalid"></p-button>
+    <p-button (onClick)="onLogin()" [disabled]="loginForm.invalid" [loading]="isLoading" label="Login"
+              styleClass="btn-default"></p-button>
   </form>
   <div class="login-page__footer">
     <p>Don't have an account? <a routerLink="/auth/signup">Register</a></p>
