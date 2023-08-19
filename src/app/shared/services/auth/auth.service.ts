@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpService} from "../http/http.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {IAuthInfo, IUserInfo} from "../../interfaces/auth.interface";
-import {BehaviorSubject, from, Observable} from "rxjs";
+import {BehaviorSubject, from, Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   loginWithEmail(loginInfo: IAuthInfo): Observable<any> {
-    return from(this.authFirebase.signInWithEmailAndPassword(loginInfo.email, loginInfo.password))
+    return of(this.authFirebase.signInWithEmailAndPassword(loginInfo.email, loginInfo.password))
   }
 
   logoutUser(): Observable<any> {

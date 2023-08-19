@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }));
     this.isUserLoggedIn$.pipe(takeUntil(this.destroy$)).subscribe((isUserLoggedIn) => {
       if (isUserLoggedIn) {
-        this.router.navigate(['-items']);
+        this.router.navigate(['/app/items']);
       }
     });
     this.loginErrors$.pipe(takeUntil(this.destroy$)).subscribe((loginErrors) => {

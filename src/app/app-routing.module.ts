@@ -5,10 +5,10 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
-import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
+import {AngularFireAuthGuard} from '@angular/fire/compat/auth-guard';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-const redirectLoggedInToItems = () => redirectLoggedInTo(['items']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth/login']);
+const redirectLoggedInToItems = () => redirectLoggedInTo(['/app/items']);
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'app/items'},
@@ -16,8 +16,8 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./modules/authorization/authorization.module').then(m => m.AuthorizationModule),
-    canActivate:[AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToItems }
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectLoggedInToItems}
   },
   {
     path: 'app',
