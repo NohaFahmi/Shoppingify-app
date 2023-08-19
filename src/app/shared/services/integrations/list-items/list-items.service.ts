@@ -13,6 +13,7 @@ export class ListItemsService {
   getAllListItems(): Observable<{items: {_id: string,categoryName:string; items: IListItem[]}[]}> {
     return this.httpService.get('list-items/getAll');
   }
+
   getItemById(id: string): Observable<{item: IListItem}> {
     return this.httpService.get(`list-items/get/${id}`);
   }
