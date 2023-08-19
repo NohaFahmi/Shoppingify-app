@@ -31,6 +31,12 @@
         }
       }
 
+      .btn-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       .p-error {
         font-size: 12px;
         font-style: italic;

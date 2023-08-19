@@ -22,8 +22,10 @@
         {{getFormValidationErrors(loginForm.controls['password']) == 1 ? 'Password is required' : 'Password is invalid'}}
       </p>
     </div>
-    <p-button (onClick)="onLogin()" [disabled]="loginForm.invalid" [loading]="isLoading" label="Login"
-              styleClass="btn-default"></p-button>
+    <div class="btn-wrapper">
+      <p-button (onClick)="onLogin()" [disabled]="loginForm.invalid" [loading]="isLoading" label="Login"
+                styleClass="btn-default"></p-button>
+    </div>
   </form>
   <div class="login-page__footer">
     <p>Don't have an account? <a routerLink="/auth/signup">Register</a></p>

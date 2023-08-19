@@ -1,4 +1,7 @@
 <div class="signup-page__container">
+  <div class="errors-wrapper">
+    <p-toast></p-toast>
+  </div>
   <div class="signup-page__logo-wrapper">
     <img src="assets/images/logo.svg"/>
     <h3>Shoppingify allows you take your shopping list wherever you go</h3>
@@ -34,7 +37,10 @@
           'Password is invalid'}}
       </p>
     </div>
-    <p-button label="Signup" styleClass="btn-default" (onClick)="onSignup()" [disabled]="signupForm.invalid"></p-button>
+    <div class="btn-wrapper">
+      <p-button (onClick)="onSignup()" [disabled]="signupForm.invalid" [loading]="isLoading" label="Signup"
+                styleClass="btn-default"></p-button>
+    </div>
   </form>
   <div class="signup-page__footer">
     <p>Already have an account? <a routerLink="/auth/login">Login</a></p>

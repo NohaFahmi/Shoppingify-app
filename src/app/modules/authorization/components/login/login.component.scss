@@ -31,6 +31,21 @@
         }
       }
 
+      .btn-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .p-inputtext {
+        width: 100%;
+      }
+
+      .p-password {
+        width: 100%;
+        max-width: 400px;
+      }
+
       .p-error {
         font-size: 12px;
         font-style: italic;
