@@ -2,6 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from 
 import {MenuItem} from "primeng/api";
 import {AuthService} from "../../../../shared/services/auth/auth.service";
 import {Router} from "@angular/router";
+import {Store} from "@ngrx/store";
+import {AuthorizationActions, AuthorizationSelectors, AuthState} from "../../../../store/authorization";
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-sidebar',
@@ -10,17 +13,16 @@ import {Router} from "@angular/router";
   encapsulation: ViewEncapsulation.None
 })
 export class SidebarComponent implements OnInit {
+  isUserLoggedIn$: Observable<boolean> = of(false);
+
   @Input() menuItems: MenuItem[] = [];
   @Output() onOpenShoppingList: EventEmitter<any> = new EventEmitter<any>();
-  menuOptions: {name:string; icon: string; command:() => any}[] = [
+  menuOptions: { name: string; icon: string; command: () => any }[] = [
     {
       name: "Logout",
       icon: "pi pi-fw pi-sign-out",
       command: () => {
-        this.authService.logoutUser().then(() => {
-          this.authService.userInfo.next(null);
-          this.router.navigate(['/auth/login'])
-        })
+        this.store.dispatch(AuthorizationActions.logout());
       }
     },
     {
@@ -30,10 +32,11 @@ export class SidebarComponent implements OnInit {
     }
   ];
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private store: Store<AuthState>) {
   }
 
   ngOnInit(): void {
+    this.isUserLoggedIn$ = this.store.select(AuthorizationSelectors.selectIsLoggedIn);
     this.menuItems = [
       {label: 'items', icon: 'pi pi-fw pi-list', routerLink: ['/app/items']},
       {label: 'history', icon: 'pi pi-fw pi-replay', routerLink: ['/app/orders-history']},
@@ -49,5 +52,14 @@ export class SidebarComponent implements OnInit {
     $event.originalEvent.stopPropagation();
     $event.originalEvent.preventDefault();
     $event.value.command();
+  }
+
+  onLogout() {
+    this.store.dispatch(AuthorizationActions.logout());
+    this.isUserLoggedIn$.pipe().subscribe((isUserLoggedIn) => {
+      if (!isUserLoggedIn) {
+        this.router.navigate(['/auth/login']);
+      }
+    });
   }
 }
