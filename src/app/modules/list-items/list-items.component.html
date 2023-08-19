@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="list-items-page__items-groups">
-    <div class="items-group" *ngFor="let group of listOfItems | keyvalue;">
+    <div *ngFor="let group of listItems | keyvalue;" class="items-group">
       <h5 class="items-group_title">{{group.key}}</h5>
       <div class="items-group_units">
         <div class="item-unit" *ngFor="let item of group.value;">

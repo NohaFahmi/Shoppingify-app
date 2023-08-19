@@ -1,4 +1,4 @@
-import {createAction, createActionGroup, emptyProps, props} from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
 import {IListItem} from "../../../shared/interfaces/list-items.interface";
 
 export const getItemsList = createAction('[Items List] Get Items List');
