@@ -15,13 +15,13 @@ export class ListItemsService {
   }
 
   getItemById(id: string): Observable<{item: IListItem}> {
-    return this.httpService.get(`list-items/get/${id}`);
+    return this.httpService.get(`list-items/get?id=${id}`);
   }
   updateListItem(id: string, item: IListItem): Observable<{item: IListItem}> {
-    return this.httpService.put(`list-items/update`, item);
+    return this.httpService.put(`list-items/update`, {itemId: id, item});
   }
   deleteListItem(id: string): Observable<{item: IListItem}> {
-    return this.httpService.delete(`list-items/delete/${id}`);
+    return this.httpService.delete(`list-items/delete?id=${id}`);
   }
   createListItem(item: IListItem): Observable<{item: IListItem}> {
     return this.httpService.post(`list-items/create`, item);
