@@ -15,7 +15,7 @@ export class ListItemsService {
   }
 
   getItemById(id: string): Observable<{item: IListItem}> {
-    return this.httpService.get(`list-items/get?id=${id}`);
+    return this.httpService.get(`list-items/get/${id}`);
   }
   updateListItem(id: string, item: IListItem): Observable<{item: IListItem}> {
     return this.httpService.put(`list-items/update`, {itemId: id, item});
