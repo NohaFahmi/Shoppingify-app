@@ -17,13 +17,18 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
+  on(AuthorizationActions.refreshToken, (state, {user}) => ({
+    ...state,
+    userInfo: user,
+    loading: false
+  })),
   on(AuthorizationActions.signup, (state) => ({
     ...state,
     loading: true,
   })),
-  on(AuthorizationActions.signupSuccess, (state, {userInfo}) => ({
+  on(AuthorizationActions.createUserInDBSuccess, (state, {user}) => ({
     ...state,
-    userInfo,
+    userInfo: user,
     loading: false
   })),
   on(AuthorizationActions.signupFailure, (state, {error}) => ({
@@ -32,9 +37,20 @@ export const authReducer = createReducer(
     loading: false,
     errors: error,
   })),
+  on(AuthorizationActions.createUserInDBFailure, (state, {error}) => ({
+    ...state,
+    userInfo: null,
+    loading: false,
+    errors: error,
+  })),
   on(AuthorizationActions.login, (state) => ({
     ...state,
     loading: true,
+  })),
+  on(AuthorizationActions.setUserInfo, (state, {userInfo}) => ({
+    ...state,
+    userInfo,
+    loading: false
   })),
   on(AuthorizationActions.loginSuccess, (state, {userInfo}) => ({
     ...state,

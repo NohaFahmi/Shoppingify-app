@@ -9,5 +9,6 @@ export interface IUserInfo {
   displayName: string;
   photoURL: string;
   emailVerified: boolean;
+  refreshToken?: string;
 }
 

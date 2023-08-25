@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {IUserInfo} from "./shared/interfaces/auth.interface";
 import {AuthService} from "./shared/services/auth/auth.service";
+import {Store} from "@ngrx/store";
+import {AuthorizationActions, AuthorizationSelectors, AuthState} from "./store/authorization";
+import {Observable, of} from "rxjs";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,9 +13,8 @@ import {AuthService} from "./shared/services/auth/auth.service";
 })
 export class AppComponent implements OnInit {
   title = 'Shoppingify-app';
-  userInfo:IUserInfo | null = null;
 
-  constructor(private authService:AuthService){
+  constructor() {
   }
 
   ngOnInit(): void {

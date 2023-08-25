@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import {Observable, switchMap} from 'rxjs';
+import {Observable, of, switchMap} from 'rxjs';
 import {AuthService} from "../../shared/services/auth/auth.service";
 
 @Injectable()
@@ -14,8 +14,8 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return this.authService.getUserRefreshToken().pipe(switchMap((t) => {
-      return next.handle(this.addAuthToken(request, t));
+    return this.authService.getUserRefreshToken().pipe(switchMap((user) => {
+      return next.handle(this.addAuthToken(request, user.refreshToken));
     }));
   }
 

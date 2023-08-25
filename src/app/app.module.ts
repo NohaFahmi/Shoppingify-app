@@ -14,6 +14,8 @@ import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
+import {getAuth, provideAuth} from "@angular/fire/auth";
+import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {StoreRouterConnectingModule} from '@ngrx/router-store';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
     AngularFireAuthModule,
     HttpClientModule,
     AppStoreModule,

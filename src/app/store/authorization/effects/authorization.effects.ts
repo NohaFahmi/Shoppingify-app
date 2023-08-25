@@ -23,8 +23,20 @@ export class AuthorizationEffects {
       ofType(AuthorizationActions.signup),
       switchMap((action) =>
         this.authService.emailSignup(action).pipe(
-          map((userInfo) => AuthorizationActions.signupSuccess({userInfo})),
+          map((userInfo) => AuthorizationActions.signupSuccess({userInfo: userInfo.user})),
           catchError((error) => of(AuthorizationActions.signupFailure({error})))
+        )
+      )
+    );
+  });
+
+  createUserInDB$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthorizationActions.signupSuccess),
+      switchMap((action) =>
+        this.authService.createUserInDB(action.userInfo).pipe(
+          map(() => AuthorizationActions.createUserInDBSuccess({user: action.userInfo})),
+          catchError((error) => of(AuthorizationActions.createUserInDBFailure({error})))
         )
       )
     );

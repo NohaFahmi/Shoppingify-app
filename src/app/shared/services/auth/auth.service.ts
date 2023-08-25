@@ -1,20 +1,29 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from "../http/http.service";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {IAuthInfo, IUserInfo} from "../../interfaces/auth.interface";
-import {BehaviorSubject, from, Observable, of} from "rxjs";
+import {from, Observable, of} from "rxjs";
+import {AuthorizationActions, AuthState} from "../../../store/authorization";
+import {Store} from "@ngrx/store";
+import {
+  Auth,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut,
+} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userInfo: BehaviorSubject<IUserInfo | null> = new BehaviorSubject<IUserInfo | null>(null);
   constructor(private httpService: HttpService,
-              private authFirebase: AngularFireAuth) {
+              private auth: Auth, private store: Store<AuthState>) {
   }
 
-  emailSignup(signupInfo: IAuthInfo):Observable<any> {
-    return from(this.authFirebase.createUserWithEmailAndPassword(signupInfo.email, signupInfo.password));
+  emailSignup(signupInfo: IAuthInfo): Observable<any> {
+    return from(createUserWithEmailAndPassword(this.auth, signupInfo.email, signupInfo.password));
   }
 
   createUserInDB(userInfo: IUserInfo): Observable<any> {
@@ -27,8 +36,8 @@ export class AuthService {
     });
   }
 
-  getUserByUUID(uid: string): Observable<any> {
-    return this.httpService.post(`users/getById`, {uid: uid});
+  getUserByUUID(user: IUserInfo): Observable<any> {
+    return this.httpService.get(`users/getById/${user.uid}`);
   }
 
   updateUserInDB(userInfo: IUserInfo): Observable<any> {
@@ -36,29 +45,38 @@ export class AuthService {
   }
 
   loginWithEmail(loginInfo: IAuthInfo): Observable<any> {
-    return of(this.authFirebase.signInWithEmailAndPassword(loginInfo.email, loginInfo.password))
+    return of(signInWithEmailAndPassword(this.auth, loginInfo.email, loginInfo.password))
   }
 
   logoutUser(): Observable<any> {
-    return from(this.authFirebase.signOut());
+    return of(signOut(this.auth));
   }
 
-  sendVerificationEmail() {
-    return this.authFirebase.currentUser.then((user) =>
-      user?.sendEmailVerification());
+  loginWithGoogle() {
+    return signInWithPopup(this.auth, new GoogleAuthProvider());
+  }
+
+  // sendVerificationEmail() {
+  //   return this.auth.currentUser.then((user) =>
+  //     user?.sendEmailVerification());
+  // }
+  setUserInfo(user: IUserInfo | null) {
+    console.log("SEEET", user);
   }
 
   getUserRefreshToken(): Observable<any> {
     return new Observable((observer) => {
-      this.authFirebase.onAuthStateChanged(user => {
-        observer.next(user?.refreshToken);
-        this.userInfo.next(user as IUserInfo);
-        if (user) {
-          console.log("USER", user.refreshToken);
-        } else {
-          console.log("USER", 'sign out');
-        }
-      })
+      // onAuthStateChanged(this.auth,user => {
+      //   // this.userInfo.next(user as IUserInfo);
+      //   observer.next(user);
+      //   if (user) {
+      //     this.store.dispatch(AuthorizationActions.setUserInfo({ userInfo: user as IUserInfo }));
+      //     console.log("USER", user.refreshToken);
+      //   } else {
+      //     this.store.dispatch(AuthorizationActions.logout());
+      //     console.log("USER", 'sign out');
+      //   }
+      // })
     })
   }
 }
