@@ -40,7 +40,7 @@ export class ItemsListEffects {
     return this.actions$.pipe(
       ofType(ListItemsActions.getItemDetails),
       switchMap((action) =>
-        this.listItemsService.getItemById(action.itemId).pipe(
+        this.listItemsService.getItemById(action?.itemId).pipe(
           map((results) => ListItemsActions.getItemDetailsSuccess({item: results.item})),
           catchError((error) => of(ListItemsActions.getItemDetailsFailure({error})))
         ))

@@ -36,7 +36,7 @@ export class ListItemsComponent implements OnInit, OnDestroy {
   }
 
   viewItemDetails(item: IListItem) {
-    this.store.dispatch(ItemsListActions.getItemDetails({itemId: item._id}));
+    this.store.dispatch(ItemsListActions.getItemDetails({itemId: item?._id}));
   }
 
   onAddingItemToList(item: IListItem) {

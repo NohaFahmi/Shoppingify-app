@@ -14,10 +14,11 @@ export class ListItemsService {
     return this.httpService.get('list-items/getAll');
   }
 
-  getItemById(id: string): Observable<{item: IListItem}> {
+  getItemById(id?: string): Observable<{ item: IListItem }> {
     return this.httpService.get(`list-items/get/${id}`);
   }
-  updateListItem(id: string, item: IListItem): Observable<{item: IListItem}> {
+
+  updateListItem(id: string, item: IListItem): Observable<{ item: IListItem }> {
     return this.httpService.put(`list-items/update`, {itemId: id, item});
   }
   deleteListItem(id: string): Observable<{item: IListItem}> {
