@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {AuthService} from "../../../../shared/services/auth/auth.service";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {AuthorizationActions, AuthorizationSelectors, AuthState} from "../../../../store/authorization";
-import {Observable, of} from "rxjs";
+import {first, Observable, of, Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-sidebar',
@@ -12,11 +12,8 @@ import {Observable, of} from "rxjs";
   styleUrls: ['./sidebar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   isUserLoggedIn$: Observable<boolean> = of(false);
-
-  @Input() menuItems: MenuItem[] = [];
-  @Output() onOpenShoppingList: EventEmitter<any> = new EventEmitter<any>();
   menuOptions: { name: string; icon: string; command: () => any }[] = [
     {
       name: "Logout",
@@ -28,11 +25,20 @@ export class SidebarComponent implements OnInit {
     {
       name: "Shopping List",
       icon: "pi pi-fw pi-shopping-cart",
-      command: () => {}
+      command: () => {
+      }
     }
   ];
+  @Input() menuItems: MenuItem[] = [];
+  @Output() onOpenShoppingList: EventEmitter<any> = new EventEmitter<any>();
+  private destroy$: Subject<void> = new Subject();
 
-  constructor(private authService: AuthService, private router: Router, private store: Store<AuthState>) {
+  constructor(private authService: AuthService, private readonly router: Router, private store: Store<AuthState>) {
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
@@ -56,10 +62,11 @@ export class SidebarComponent implements OnInit {
 
   onLogout() {
     this.store.dispatch(AuthorizationActions.logout());
-    this.isUserLoggedIn$.pipe().subscribe((isUserLoggedIn) => {
+    this.isUserLoggedIn$.pipe(takeUntil(this.destroy$)).subscribe((isUserLoggedIn) => {
       if (!isUserLoggedIn) {
         this.router.navigate(['/auth/login']);
       }
     });
   }
+
 }

@@ -1,0 +1,44 @@
+.new-item-banner {
+  background-color: #80485B;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 25px;
+  border-radius: 25px;
+  margin: 45px 45px 40px;
+
+  img {
+    position: absolute;
+    top: -20px;
+    left: 0;
+  }
+
+  .actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 20px;
+    right: 0;
+    gap: 13px;
+
+    p {
+      max-width: 160px;
+      margin: 0;
+    }
+
+    button {
+      padding: 11px 29px !important;
+      height: 40px;
+      font-size: 14px;
+      width: fit-content;
+      border-radius: 12px;
+      background-color: #fff;
+      color: #34333A;
+      font-weight: 700;
+      border: none;
+    }
+  }
+}

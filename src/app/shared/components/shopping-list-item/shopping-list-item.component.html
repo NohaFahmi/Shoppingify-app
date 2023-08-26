@@ -1,0 +1,28 @@
+<div *ngFor="let group of listOfShoppingItems | keyvalue;" class="list-item">
+  <h4>{{group.key}}</h4>
+  <div *ngFor="let item of group.value" class="item-checkbox">
+    <p-checkbox *ngIf="!isEditMode" [name]="group.key" [value]="item.name"></p-checkbox>
+    <label [for]="item.name" class="item">
+      <p class="item-name">Pre-cooked corn 450g</p>
+      <p *ngIf="!isEditMode" class="item-quantity">
+        <span>10 pcs</span>
+      </p>
+      <span *ngIf="isEditMode" class="item-quantity-edit">
+              <button class="delete-btn"
+                      icon="pi pi-trash" pButton
+                      type="button"></button>
+              <p-inputNumber
+                [showButtons]="true"
+                [step]="0.25"
+                buttonLayout="horizontal"
+                decrementButtonClass="p-button-danger"
+                decrementButtonIcon="pi pi-minus"
+                incrementButtonClass="p-button-success"
+                incrementButtonIcon="pi pi-plus"
+                inputId="horizontal"
+                spinnerMode="horizontal">
+            </p-inputNumber>
+            </span>
+    </label>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <div class="menu-sidebar__wrapper">
   <img src="../../../../../assets/images/logo.svg" alt="logo"/>
-
+  <button (click)="onLogout()">LOGOUT</button>
   <ul class="menu-sidebar__links">
     <li class="menu-sidebar__links_item" *ngFor="let item of menuItems;" [routerLink]="item.routerLink">
         <i [class]="item.icon"></i>
