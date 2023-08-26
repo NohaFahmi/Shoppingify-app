@@ -6,7 +6,7 @@ export {
   shoppingListsReducer,
   shoppingListsFeatureKey,
   initialState as InitialShoppingListsState,
-} from './reducers/shopping-lists.reducers.';
+} from './reducers/shopping-lists.reducers';
 
 export {ShoppingListsEffects} from './effects/shopping-lists.effects';
 

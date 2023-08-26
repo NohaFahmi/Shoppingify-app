@@ -5,6 +5,7 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {ItemsListStoreModule} from "./items-list/items-list-store.module";
 import {ShoppingListsStoreModule} from "./shopping-lists/shopping-lists.store.module";
+import {CategoriesStoreModule} from "./categories/categories.store.module";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {ShoppingListsStoreModule} from "./shopping-lists/shopping-lists.store.mo
     EffectsModule.forRoot([]),
     AuthorizationStoreModule,
     ItemsListStoreModule,
-    ShoppingListsStoreModule
+    ShoppingListsStoreModule,
+    CategoriesStoreModule
   ]
 })
 export class AppStoreModule {

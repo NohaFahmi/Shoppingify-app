@@ -15,7 +15,7 @@
     </div>
     <div class="input-group categories-dropdown">
       <label>Category</label>
-      <p-dropdown [options]="[{name: 'item', id:1}, {name:'item2', id:2}]" optionLabel="name"></p-dropdown>
+      <p-dropdown [options]="categories || []" optionLabel="name"></p-dropdown>
     </div>
 
     <div class="form-actions">

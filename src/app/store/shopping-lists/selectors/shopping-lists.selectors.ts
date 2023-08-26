@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {shoppingListsFeatureKey, ShoppingListsState} from "../reducers/shopping-lists.reducers.";
+import {shoppingListsFeatureKey, ShoppingListsState} from "../reducers/shopping-lists.reducers";
 
 export const selectShoppingListsState = createFeatureSelector<ShoppingListsState>(shoppingListsFeatureKey);
 

@@ -1,7 +1,18 @@
 <div class="shopping-list-sidebar__container">
-  <app-user-shopping-list *ngIf="currentView == 1"></app-user-shopping-list>
-  <app-new-item-form *ngIf="currentView == 3"></app-new-item-form>
-  <app-item-details (backInView)="currentView = 1"
-                    *ngIf="!(isLoading$ | async) && (listItemDetails$ | async)"
-                    [item]="listItemDetails$ | async"></app-item-details>
+  <div class="shopping-list-sidebar__shopping-list-wrapper">
+    <app-user-shopping-list (onChangingCurrentView)="onChangeToAddItemView($event)"
+                            *ngIf="currentView == 1">
+    </app-user-shopping-list>
+  </div>
+  <div class="shopping-list-sidebar__form-wrapper">
+    <app-new-item-form *ngIf="currentView == 3 || currentView == 4"
+                       [categories]="categories$ | async"
+                       [isEditMode]="currentView == 4"
+                       [item]="listItemDetails$ | async"></app-new-item-form>
+  </div>
+  <div class="shopping-list-sidebar__item-details-wrapper">
+    <app-item-details (backInView)="currentView = 1"
+                      *ngIf="!(isLoading$ | async) && (listItemDetails$ | async)"
+                      [item]="listItemDetails$ | async"></app-item-details>
+  </div>
 </div>
