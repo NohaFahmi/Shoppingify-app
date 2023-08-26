@@ -7,7 +7,6 @@ import {catchError, map, of, switchMap} from "rxjs";
 @Injectable()
 export class ItemsListEffects {
   getAllItems$ = createEffect(() => {
-    console.log('HERE-GET-ALL-ITEMS');
     return this.actions$.pipe(
       ofType(ListItemsActions.getItemsList),
       switchMap(() =>
