@@ -4,11 +4,16 @@ export interface IAuthInfo {
 }
 
 export interface IUserInfo {
-  uid: string;
+  uid?: string;
   email: string;
-  displayName: string;
-  photoURL: string;
-  emailVerified: boolean;
+  displayName?: string;
+  photoURL?: string;
+  emailVerified?: boolean;
   refreshToken?: string;
+  firstName?: string;
+  lastName?: string;
+  phoneNumber?: string;
+  password?: string;
+  _id?: string;
 }
 
