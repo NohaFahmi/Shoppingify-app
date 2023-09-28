@@ -1,0 +1,20 @@
+import {createAction, props} from '@ngrx/store';
+
+export const createShoppingList = createAction('[Shopping List] Create Shopping List', props<{ list: any }>());
+export const createShoppingListSuccess = createAction('[Shopping List] Create Shopping List Success', props<{ list: any }>());
+export const createShoppingListFailure = createAction('[Shopping List] Create Shopping List Failure', props<{ error: any }>());
+export const getShoppingListDetails = createAction('[Shopping List] Get Shopping List Details', props<{ listId: string }>());
+export const getShoppingListDetailsSuccess = createAction('[Shopping List] Get Shopping List Details Success', props<{ list: any }>());
+export const getShoppingListDetailsFailure = createAction('[Shopping List] Get Shopping List Details Failure', props<{ error: any }>());
+export const getShoppingHistory = createAction('[Shopping List] Get Shopping History', props<{ userId: string }>());
+export const getShoppingHistorySuccess = createAction('[Shopping List] Get Shopping History Success', props<{ lists: { _id: string; items: any[] }[] }>());
+export const getShoppingHistoryFailure = createAction('[Shopping List] Get Shopping History Failure', props<{ error: any }>());
+export const updateShoppingList = createAction('[Shopping List] Update Shopping List', props<{ listId: string, list: any }>());
+export const updateShoppingListSuccess = createAction('[Shopping List] Update Shopping List Success', props<{ list: any }>());
+export const updateShoppingListFailure = createAction('[Shopping List] Update Shopping List Failure', props<{ error: any }>());
+export const updateShoppingListStatus = createAction('[Shopping List] Update Shopping List Status', props<{ listId: string, status: string }>());
+export const updateShoppingListStatusSuccess = createAction('[Shopping List] Update Shopping List Status Success', props<{ list: any }>());
+export const updateShoppingListStatusFailure = createAction('[Shopping List] Update Shopping List Status Failure', props<{ error: any }>());
+export const deleteShoppingList = createAction('[Shopping List] Delete Shopping List', props<{ listId: string }>());
+export const deleteShoppingListSuccess = createAction('[Shopping List] Delete Shopping List Success');
+export const deleteShoppingListFailure = createAction('[Shopping List] Delete Shopping List Failure', props<{ error: any }>());

@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
 import {IListItem} from "../../interfaces/list-items.interface";
 
 @Component({
@@ -13,16 +13,18 @@ export class UserShoppingListComponent {
       "Fruits": [
           {
               _id: '1',
-              name: 'Apple',
-              description: 'Red apple',
-              price: 1.99,
-              quantity: 1,
-              imageURL: 'https://www.thermofisher.com/blog/wp-content/uploads/sites/5/2015/11/apple.jpg',
-              categoryId: '1',
-              quantityUnit: 'kg'
+            name: 'Apple',
+            description: 'Red apple',
+            price: 1.99,
+            quantity: 1,
+            imageURL: 'https://www.thermofisher.com/blog/wp-content/uploads/sites/5/2015/11/apple.jpg',
+            categoryId: '1',
+            quantityUnit: 'kg'
           }
       ]
   }
+  @Output() onChangingCurrentView: EventEmitter<number> = new EventEmitter<number>();
+
   constructor() {
   }
 
@@ -31,6 +33,10 @@ export class UserShoppingListComponent {
 
   toggleEditMode(isEditMode: boolean) {
     this.isEditMode = isEditMode;
+  }
+
+  addNewItem() {
+    this.onChangingCurrentView.emit(3);
   }
 }
 

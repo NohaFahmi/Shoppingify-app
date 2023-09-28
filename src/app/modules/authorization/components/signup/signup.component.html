@@ -7,6 +7,20 @@
     <h3>Shoppingify allows you take your shopping list wherever you go</h3>
   </div>
   <form class="input-group" [formGroup]="signupForm">
+    <div [ngClass]="{'ng-invalid': getFormValidationErrors(signupForm.controls['firstName'])}" class="input-field">
+      <label for="firstName">First Name</label>
+      <input formControlName="firstName" id="firstName" pInputText/>
+      <p *ngIf="getFormValidationErrors(signupForm.controls['firstName'])" class="p-error">
+        {{getFormValidationErrors(signupForm.controls['firstName']) ? 'First Name is required' : ''}}
+      </p>
+    </div>
+    <div [ngClass]="{'ng-invalid': getFormValidationErrors(signupForm.controls['lastName'])}" class="input-field">
+      <label for="lastName">Last Name</label>
+      <input formControlName="lastName" id="lastName" pInputText/>
+      <p *ngIf="getFormValidationErrors(signupForm.controls['lastName'])" class="p-error">
+        {{getFormValidationErrors(signupForm.controls['lastName']) ? 'Last Name is required' : ''}}
+      </p>
+    </div>
     <div class="input-field" [ngClass]="{'ng-invalid': getFormValidationErrors(signupForm.controls['email'])}">
       <label for="email">Email</label>
       <input pInputText id="email" formControlName="email"/>

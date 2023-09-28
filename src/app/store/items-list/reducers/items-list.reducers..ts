@@ -51,7 +51,7 @@ export const itemsListReducer = createReducer(
   on(ItemsListActions.getItemDetailsSuccess, (state, {item}) => ({
     ...state,
     itemDetails: item,
-    loading: true,
+    loading: false,
   })),
 
   on(ItemsListActions.getItemDetailsFailure, (state, {error}) => ({

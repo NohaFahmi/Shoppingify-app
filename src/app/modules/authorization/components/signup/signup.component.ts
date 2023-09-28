@@ -3,7 +3,6 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 import {AuthService} from "../../../../shared/services/auth/auth.service";
 import {first, Observable, of, Subject, takeUntil} from "rxjs";
 import {Router} from "@angular/router";
-import {IUserInfo} from "../../../../shared/interfaces/auth.interface";
 import {Store} from "@ngrx/store";
 import {AuthorizationActions, AuthorizationSelectors, AuthState} from "../../../../store/authorization";
 import {MessageService} from "primeng/api";
@@ -28,10 +27,13 @@ export class SignupComponent implements OnInit, OnDestroy {
               private router: Router,
               private store: Store<AuthState>,
               private messageService: MessageService) {
+    this.store.dispatch(AuthorizationActions.loadCheckAuth());
     this.signupForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       password: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.passwordPattern)])),
       passwordConfirm: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.passwordPattern)])),
+      lastName: new FormControl('', Validators.compose([Validators.required])),
+      firstName: new FormControl('', Validators.compose([Validators.required])),
     })
   }
 
@@ -67,11 +69,15 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.isLoading = isLoading;
     });
     this.store.dispatch(AuthorizationActions.signup({
-      email: this.signupForm.value.email,
-      password: this.signupForm.value.password
+      user: {
+        email: this.signupForm.value.email,
+        password: this.signupForm.value.password,
+        firstName: this.signupForm.value.firstName,
+        lastName: this.signupForm.value.lastName,
+      }
     }));
     this.isUserLoggedIn$.pipe(takeUntil(this.destroy$)).subscribe((isUserLoggedIn) => {
-      if (isUserLoggedIn) {
+      if (isUserLoggedIn && !this.isLoading) {
         this.router.navigate(['/app/items']);
       }
     });

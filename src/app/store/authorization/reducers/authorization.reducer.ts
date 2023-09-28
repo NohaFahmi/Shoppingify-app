@@ -17,16 +17,26 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(AuthorizationActions.refreshToken, (state, {user}) => ({
+  on(AuthorizationActions.loadCheckAuth, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(AuthorizationActions.checkAuthSuccess, (state, {user}) => ({
     ...state,
     userInfo: user,
-    loading: false
+    loading: false,
+  })),
+  on(AuthorizationActions.checkAuthFailure, (state, {error}) => ({
+    ...state,
+    userInfo: null,
+    errors: error,
+    loading: false,
   })),
   on(AuthorizationActions.signup, (state) => ({
     ...state,
     loading: true,
   })),
-  on(AuthorizationActions.createUserInDBSuccess, (state, {user}) => ({
+  on(AuthorizationActions.signupSuccess, (state, {user}) => ({
     ...state,
     userInfo: user,
     loading: false
@@ -35,13 +45,7 @@ export const authReducer = createReducer(
     ...state,
     userInfo: null,
     loading: false,
-    errors: error,
-  })),
-  on(AuthorizationActions.createUserInDBFailure, (state, {error}) => ({
-    ...state,
-    userInfo: null,
-    loading: false,
-    errors: error,
+    errors: error.code,
   })),
   on(AuthorizationActions.login, (state) => ({
     ...state,
@@ -49,17 +53,17 @@ export const authReducer = createReducer(
   })),
   on(AuthorizationActions.setUserInfo, (state, {userInfo}) => ({
     ...state,
-    userInfo,
+    // userInfo,
     loading: false
   })),
   on(AuthorizationActions.loginSuccess, (state, {userInfo}) => ({
     ...state,
-    userInfo,
+    // userInfo: userInfo ? userInfo : null,
     loading: false
   })),
   on(AuthorizationActions.loginFailure, (state, {error}) => ({
     ...state,
-    userInfo: null,
+    // userInfo: null,
     loading: false,
     errors: error,
   })),
@@ -69,12 +73,12 @@ export const authReducer = createReducer(
   })),
   on(AuthorizationActions.logoutSuccess, (state) => ({
     ...state,
-    userInfo: null,
+    // userInfo: null,
     loading: false,
   })),
   on(AuthorizationActions.logoutFailure, (state, {error}) => ({
     ...state,
-    userInfo: null,
+    // userInfo: null,
     loading: false,
     errors: error,
   }))

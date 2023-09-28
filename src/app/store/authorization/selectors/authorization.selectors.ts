@@ -6,6 +6,11 @@ export const selectIsLoading = createSelector(
   selectAuthorizationState,
   (authState) => authState.loading
 );
+
+export const selectUserRefreshToken = createSelector(
+  selectAuthorizationState,
+  (authState) => authState.userInfo?.refreshToken
+);
 export const selectUserInfo = createSelector(
   selectAuthorizationState,
   (authState) => authState.userInfo

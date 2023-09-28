@@ -1,22 +1,19 @@
-<div class="item-details__container">
-  <p-button styleClass="p-button-link" label="back" icon="pi pi-arrow-left" iconPos="left"></p-button>
+<div *ngIf="item" class="item-details__container">
+  <p-button (onClick)="onBack()" icon="pi pi-arrow-left" iconPos="left" label="back"
+            styleClass="p-button-link"></p-button>
   <div class="item-details__content">
-    <img src="https://via.placeholder.com/150" alt="item image" class="item-details__image">
+    <img [src]="item.imageURL" alt="item image" class="item-details__image">
     <div class="item-details__content_info-group">
       <p>name</p>
-      <p class="item-name">Avocado</p>
+      <p class="item-name">{{item.name}}</p>
     </div>
     <div class="item-details__content_info-group">
       <p>category</p>
-      <p>Fruit and vegetables</p>
+      <p>{{item.categoryId}}</p>
     </div>
     <div class="item-details__content_info-group">
       <p>note</p>
-      <p>Nutrient-dense foods are those that provide
-        substantial amounts of vitamins, minerals and other nutrients with
-        relatively few calories. One-third of a medium avocado (50 g) has
-        80 calories and contributes nearly 20 vitamins and minerals,
-        making it a great nutrient-dense food choice. </p>
+      <p>{{item.description}} </p>
     </div>
     <div class="item-details__content_actions">
       <p-button label="delete" styleClass="p-button-link"></p-button>

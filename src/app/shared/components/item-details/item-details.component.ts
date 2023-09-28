@@ -1,4 +1,5 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
+import {IListItem} from "../../interfaces/list-items.interface";
 
 @Component({
   selector: ' app-item-details',
@@ -7,5 +8,16 @@ import {Component, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class ItemDetailsComponent {
+  @Input() item: IListItem | null = null;
+  @Output() backInView: EventEmitter<void> = new EventEmitter<void>();
 
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
+  onBack() {
+    this.backInView.emit();
+  }
 }
