@@ -56,9 +56,9 @@ export const authReducer = createReducer(
     // userInfo,
     loading: false
   })),
-  on(AuthorizationActions.loginSuccess, (state, {userInfo}) => ({
+  on(AuthorizationActions.loginSuccess, (state, {user}) => ({
     ...state,
-    // userInfo: userInfo ? userInfo : null,
+    userInfo: user ? user : null,
     loading: false
   })),
   on(AuthorizationActions.loginFailure, (state, {error}) => ({
@@ -73,12 +73,12 @@ export const authReducer = createReducer(
   })),
   on(AuthorizationActions.logoutSuccess, (state) => ({
     ...state,
-    // userInfo: null,
+    userInfo: null,
     loading: false,
   })),
   on(AuthorizationActions.logoutFailure, (state, {error}) => ({
     ...state,
-    // userInfo: null,
+    userInfo: null,
     loading: false,
     errors: error,
   }))

@@ -10,7 +10,7 @@ export const login = createAction('[Authorization] Login',
   props<IAuthInfo>());
 export const loginSuccess = createAction('[Authorization] Login Success',
   props<{
-    userInfo?: IUserInfo
+    user?: IUserInfo
   }>());
 
 export const loginFailure = createAction('[Authorization] Login Failure',

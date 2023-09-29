@@ -68,7 +68,7 @@ export class AuthorizationEffects {
               emailVerified: user.user.emailVerified,
               refreshToken: user.user.refreshToken
             };
-            return AuthorizationActions.loginSuccess({userInfo: authUser});
+            return AuthorizationActions.loginSuccess({user: authUser});
           })
           .catch((error) => AuthorizationActions.loginFailure({error}
           ))

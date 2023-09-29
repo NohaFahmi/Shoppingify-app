@@ -27,7 +27,6 @@ export class SignupComponent implements OnInit, OnDestroy {
               private router: Router,
               private store: Store<AuthState>,
               private messageService: MessageService) {
-    this.store.dispatch(AuthorizationActions.loadCheckAuth());
     this.signupForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       password: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.passwordPattern)])),
