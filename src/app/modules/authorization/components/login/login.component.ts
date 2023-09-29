@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private router: Router,
               private store: Store<AuthState>, private messageService: MessageService) {
-    this.store.dispatch(AuthorizationActions.loadCheckAuth());
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       password: new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.passwordPattern)])),
