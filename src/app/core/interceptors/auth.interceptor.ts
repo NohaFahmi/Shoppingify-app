@@ -8,7 +8,7 @@ import {
 import {Observable, of, switchMap} from 'rxjs';
 import {AuthService} from "../../shared/services/auth/auth.service";
 import {Store} from "@ngrx/store";
-import {AuthorizationSelectors, AuthState} from "../../store/authorization";
+import {AuthorizationActions, AuthorizationSelectors, AuthState} from "../../store/authorization";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

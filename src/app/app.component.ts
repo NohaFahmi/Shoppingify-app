@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthorizationActions, AuthState} from "./store/authorization";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,11 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'Shoppingify-app';
 
-  constructor() {
+  constructor(private store: Store<AuthState>) {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(AuthorizationActions.loadCheckAuth());
+
   }
 }
