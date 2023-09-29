@@ -30,7 +30,7 @@ export class AuthorizationEffects {
                   user: authUser
                 })
               } else {
-                return AuthorizationActions.checkAuthFailure({error: 'Cancelled by user'})
+                return AuthorizationActions.checkAuthFailure({error: ''})
               }
             }),
           catchError((error) => of(AuthorizationActions.checkAuthFailure({error})))

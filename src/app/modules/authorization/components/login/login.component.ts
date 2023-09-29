@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
     });
     this.loginErrors$.pipe(takeUntil(this.destroy$)).subscribe((loginErrors) => {
+      console.log('loginErrors', loginErrors);
       if (loginErrors) {
         this.messageService.add({severity: 'error', summary: 'Error', detail: 'Invalid email or password'});
       }
